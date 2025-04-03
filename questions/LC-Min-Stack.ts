@@ -12,16 +12,15 @@
 
 		push(val: number): void {
 			this.stack.push(val);
-			if (this.minStack.length === 0 || val <= this.minStack[this.minStack.length - 1]) {
-				this.minStack.push(val);
-			}
+			// Push the lowest value on top of the minStack.
+            // This way, we can get the lowest value in O(1) time.
+            val = Math.min(val, this.minStack.length === 0 ? val : this.minStack[this.minStack.length - 1]);
+            this.minStack.push(val);
 		}
 
 		pop(): void {
-			const poppedValue = this.stack.pop();
-			if (poppedValue === this.minStack[this.minStack.length - 1]) {
-				this.minStack.pop();
-			}
+			this.stack.pop();
+			this.minStack.pop();
 		}
 
 		top(): number {
